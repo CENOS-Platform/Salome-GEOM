@@ -616,14 +616,10 @@ void GEOMAlgo_FinderShapeOn2::InnerPoints(const TopoDS_Face& aF,
   }
   //
   const gp_Trsf& aTrsf=aLoc.Transformation();
-  const Poly_Array1OfTriangle& aTrs=aTRF->Triangles();
-  const TColgp_Array1OfPnt& aNodes=aTRF->Nodes();
   //
   // map link/nbtriangles
-  j1=aTrs.Lower();
-  j2=aTrs.Upper();
-  for (j=j1; j<=j2; ++j) {
-    const Poly_Triangle& aTr=aTrs(j);
+  for (int j = j1; j <= aTRF->NbTriangles(); ++j) {
+    const Poly_Triangle& aTr=aTRF->Triangle(j);
     aTr.Get(n[0], n[1], n[2]);
     n[3]=n[0];
     for (k=0; k<3; ++k) {
@@ -655,11 +651,9 @@ void GEOMAlgo_FinderShapeOn2::InnerPoints(const TopoDS_Face& aF,
   }
   //
   // inner nodes=all_nodes - boundary_nodes
-  j1=aNodes.Lower();
-  j2=aNodes.Upper();
-  for (j=j1; j<=j2; ++j) {
+  for (int j=0; j<=aTRF->NbNodes(); ++j) {
     if (!aMBN.Contains(j)) {
-      aP=aNodes(j).Transformed(aTrsf);
+      aP=aTRF->Node(j).Transformed(aTrsf);
       aLP.Append(aP);
     }
   }
@@ -769,13 +763,12 @@ void GEOMAlgo_FinderShapeOn2::InnerPoints(const TopoDS_Edge& aE,
   }
   else {
     const gp_Trsf& aTrsf=aLoc.Transformation();
-    const TColgp_Array1OfPnt& aNodes=aTRE->Nodes();
     //
     aNbNodes=aPTE->NbNodes();
     const TColStd_Array1OfInteger& aInds=aPTE->Nodes();
     for (j=2; j<aNbNodes; ++j) {
       aIndex=aInds(j);
-      aP=aNodes(aIndex).Transformed(aTrsf);
+      aP = aTRE->Node(aIndex).Transformed(aTrsf);
       aLP.Append(aP);
     }
   }

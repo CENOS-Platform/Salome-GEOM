@@ -86,7 +86,9 @@
 #include <TColStd_ListOfInteger.hxx>
 #include <TColStd_MapOfInteger.hxx>
 
-#include "utilities.h"
+//#include "utilities.h"
+#define MESSAGE(msg) std::cout << msg << std::endl
+
 
 //=======================================================================
 //function : IsToMerge

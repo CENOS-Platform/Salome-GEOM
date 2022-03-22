@@ -26,7 +26,7 @@
 
 #include <BlockFix_UnionFaces.hxx>
 
-#include <Basics_OCCTVersion.hxx>
+//#include <Basics_OCCTVersion.hxx>
 
 #include <ShapeAnalysis_WireOrder.hxx>
 #include <ShapeAnalysis_Edge.hxx>
@@ -73,7 +73,7 @@
 
 #include <TColGeom_HArray2OfSurface.hxx>
 
-#include <GeomAdaptor_HSurface.hxx>
+#include <GeomAdaptor_Surface.hxx>
 #include <GeomLib_IsPlanarSurface.hxx>
 
 #include <Geom_Surface.hxx>
@@ -85,7 +85,6 @@
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 #include <Geom_RectangularTrimmedSurface.hxx>
 #include <BRepAdaptor_Surface.hxx>
-#include <BRepAdaptor_HSurface.hxx>
 #include <LocalAnalysis_SurfaceContinuity.hxx>
 #include <GeomConvert_ApproxSurface.hxx>
 #include <Bnd_Box.hxx>
@@ -299,7 +298,7 @@ static Standard_Boolean IsTangentFaces(const TopoDS_Edge& theEdge,
 
 // Computation of the number of samples on the edge.
   BRepAdaptor_Surface              aBAS(theFace);
-  Handle(BRepAdaptor_HSurface)     aBAHS      = new BRepAdaptor_HSurface(aBAS);
+  Handle(BRepAdaptor_Surface)     aBAHS      = new BRepAdaptor_Surface(aBAS);
   Handle(BRepTopAdaptor_TopolTool) aTool      = new BRepTopAdaptor_TopolTool(aBAHS);
   Standard_Integer                 aNbSamples =     aTool->NbSamples();
   const Standard_Integer           aNbSamplesMax =   23;
@@ -888,8 +887,8 @@ Standard_Boolean BlockFix_UnionFaces::IsSameDomain(const TopoDS_Face& aFace,
   if (S1->IsKind(STANDARD_TYPE(Geom_ElementarySurface)) &&
       S2->IsKind(STANDARD_TYPE(Geom_ElementarySurface)))
   {
-    Handle(GeomAdaptor_HSurface) aGA1 = new GeomAdaptor_HSurface(S1);
-    Handle(GeomAdaptor_HSurface) aGA2 = new GeomAdaptor_HSurface(S2);
+    Handle(GeomAdaptor_Surface) aGA1 = new GeomAdaptor_Surface(S1);
+    Handle(GeomAdaptor_Surface) aGA2 = new GeomAdaptor_Surface(S2);
 
     Handle(BRepTopAdaptor_TopolTool) aTT1 = new BRepTopAdaptor_TopolTool();
     Handle(BRepTopAdaptor_TopolTool) aTT2 = new BRepTopAdaptor_TopolTool();

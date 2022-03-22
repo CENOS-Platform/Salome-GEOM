@@ -36,7 +36,7 @@
 
 #include <Precision.hxx>
 
-#include <Basics_OCCTVersion.hxx>
+//#include <Basics_OCCTVersion.hxx>
 
 IMPLEMENT_STANDARD_RTTIEXT(BlockFix_BlockFixAPI, Standard_Transient)
 

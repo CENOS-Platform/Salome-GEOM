@@ -282,7 +282,8 @@ void GEOMAlgo_Splitter::PostTreat()
     myShape=aLS.First();
   }
   //
-  BOPAlgo_Builder::PostTreat();
+  Message_ProgressRange mpr;
+  BOPAlgo_Builder::PostTreat(mpr);
 }
 //=======================================================================
 //function : TreatCompound

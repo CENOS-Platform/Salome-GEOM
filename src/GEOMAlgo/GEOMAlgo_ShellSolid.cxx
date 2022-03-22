@@ -114,7 +114,8 @@ void GEOMAlgo_ShellSolidBuilder::PerformInternal(const BOPAlgo_PaveFiller& theFi
   //
   // 3. Fill Images
   // 3.1 Vertice
-  FillImagesVertices();
+  Message_ProgressRange mpr;
+  FillImagesVertices(mpr);
   if (HasErrors()) {
     return;
   }
@@ -124,7 +125,7 @@ void GEOMAlgo_ShellSolidBuilder::PerformInternal(const BOPAlgo_PaveFiller& theFi
     return;
   }
   // 3.2 Edges
-  FillImagesEdges();
+  FillImagesEdges(mpr);
   if (HasErrors()) {
     return;
   }
@@ -135,7 +136,7 @@ void GEOMAlgo_ShellSolidBuilder::PerformInternal(const BOPAlgo_PaveFiller& theFi
   } 
   //
   // 3.3 Wires
-  FillImagesContainers(TopAbs_WIRE);
+  FillImagesContainers(TopAbs_WIRE, mpr);
   if (HasErrors()) {
     return;
   }
@@ -146,7 +147,7 @@ void GEOMAlgo_ShellSolidBuilder::PerformInternal(const BOPAlgo_PaveFiller& theFi
   }
   
   // 3.4 Faces
-  FillImagesFaces();
+  FillImagesFaces(mpr);
   if (HasErrors()) {
     return;
   }
