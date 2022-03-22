@@ -86,7 +86,7 @@
 
 #include <TColgp_SequenceOfPnt2d.hxx>
 
-#include <Basics_OCCTVersion.hxx>
+//#include <Basics_OCCTVersion.hxx>
 
 static Standard_Real ComputeMaxTolOfFace(const TopoDS_Face& theFace)
 {

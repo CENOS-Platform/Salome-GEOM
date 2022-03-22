@@ -17,27 +17,6 @@
 # See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
 
-# --- options ---
-
-# additional include directories
-INCLUDE_DIRECTORIES(
-  ${OpenCASCADE_INCLUDE_DIR}
-  ${KERNEL_INCLUDE_DIRS}
-  ${PTHREAD_INCLUDE_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  )
-
-# additional preprocessor / compiler flags
-ADD_DEFINITIONS(
-  ${OpenCASCADE_DEFINITIONS}
-  )
-
-# libraries to link to
-SET(_link_LIBRARIES
-  ${OpenCASCADE_FoundationClasses_LIBRARIES}
-  ${OpenCASCADE_ModelingAlgorithms_LIBRARIES}
-  ${KERNEL_SALOMELocalTrace}
-  )
 
 # --- headers ---
 
@@ -63,12 +42,10 @@ SET(BlockFix_SOURCES
   BlockFix_UnionFaces.cxx
   )
 
-# --- rules ---
 
-ADD_LIBRARY(BlockFix ${BlockFix_SOURCES})
-TARGET_LINK_LIBRARIES(BlockFix ${_link_LIBRARIES})
-INSTALL(TARGETS BlockFix EXPORT ${PROJECT_NAME}TargetGroup DESTINATION ${SALOME_INSTALL_LIBS})
+ADD_LIBRARY(BlockFix SHARED ${BlockFix_SOURCES})
+target_include_directories(BlockFix PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 
-INSTALL(FILES ${BlockFix_HEADERS} DESTINATION ${SALOME_INSTALL_HEADERS})
+TARGET_LINK_LIBRARIES(BlockFix ${OpenCASCADE_LIBRARIES})
 
 

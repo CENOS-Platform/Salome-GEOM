@@ -17,29 +17,6 @@
 # See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
 
-# --- options ---
-
-# additional include directories
-INCLUDE_DIRECTORIES(
-  ${OpenCASCADE_INCLUDE_DIR}
-  ${KERNEL_INCLUDE_DIRS}
-  ${PROJECT_SOURCE_DIR}/src/GEOMUtils
-  ${PROJECT_SOURCE_DIR}/src/GEOM
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  )
-
-# additional preprocessor / compiler flags
-ADD_DEFINITIONS(
-  ${OpenCASCADE_DEFINITIONS}
-  )
-
-# libraries to link to
-SET(_link_LIBRARIES
-  ${OpenCASCADE_FoundationClasses_LIBRARIES}
-  ${OpenCASCADE_ModelingAlgorithms_LIBRARIES}
-  GEOMbasic GEOMUtils
-  ${KERNEL_SALOMELocalTrace}
-  )
 
 # --- headers ---
 
@@ -123,11 +100,11 @@ SET(GEOMAlgo_SOURCES
   GEOMAlgo_CoupleOfShapes.cxx
   GEOMAlgo_FinderShapeOn2.cxx
   GEOMAlgo_Extractor.cxx
-  GEOMAlgo_GetInPlace.cxx
-  GEOMAlgo_GetInPlace_1.cxx
-  GEOMAlgo_GetInPlace_2.cxx
-  GEOMAlgo_GetInPlace_3.cxx
-  GEOMAlgo_GetInPlaceAPI.cxx
+#  GEOMAlgo_GetInPlace.cxx
+#  GEOMAlgo_GetInPlace_1.cxx
+#  GEOMAlgo_GetInPlace_2.cxx
+#  GEOMAlgo_GetInPlace_3.cxx
+#  GEOMAlgo_GetInPlaceAPI.cxx
   GEOMAlgo_GlueAnalyser.cxx
   GEOMAlgo_GlueDetector.cxx
   GEOMAlgo_Gluer.cxx
@@ -156,12 +133,10 @@ SET(GEOMAlgo_SOURCES
   GEOMAlgo_WireSolid.cxx
   )
 
-# --- rules ---
 
-ADD_LIBRARY(GEOMAlgo ${GEOMAlgo_SOURCES})
-TARGET_LINK_LIBRARIES(GEOMAlgo ${_link_LIBRARIES})
-INSTALL(TARGETS GEOMAlgo EXPORT ${PROJECT_NAME}TargetGroup DESTINATION ${SALOME_INSTALL_LIBS})
+ADD_LIBRARY(GeomAlgo SHARED ${GEOMAlgo_SOURCES})
+target_include_directories(GeomAlgo PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 
-INSTALL(FILES ${GEOMAlgo_HEADERS} DESTINATION ${SALOME_INSTALL_HEADERS})
+TARGET_LINK_LIBRARIES(GeomAlgo ${OpenCASCADE_LIBRARIES})
 
 

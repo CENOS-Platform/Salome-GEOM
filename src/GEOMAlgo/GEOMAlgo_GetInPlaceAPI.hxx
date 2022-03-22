@@ -26,7 +26,7 @@
 #ifndef _GEOMAlgo_GetInPlaceAPI_HeaderFile
 #define _GEOMAlgo_GetInPlaceAPI_HeaderFile
 
-#include <GEOM_Function.hxx>
+//#include <GEOM_Function.hxx>
 
 #include <TopTools_IndexedMapOfShape.hxx>
 #include <TopTools_ListOfShape.hxx>

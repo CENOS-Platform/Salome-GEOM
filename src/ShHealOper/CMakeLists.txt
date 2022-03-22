@@ -17,27 +17,6 @@
 # See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
 
-# --- options ---
-
-# additional include directories
-INCLUDE_DIRECTORIES(
-  ${OpenCASCADE_INCLUDE_DIR}
-  ${KERNEL_INCLUDE_DIRS}
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  )
-
-# additional preprocessor / compiler flags
-ADD_DEFINITIONS(
-  ${OpenCASCADE_DEFINITIONS}
-  )
-
-# libraries to link to
-SET(_link_LIBRARIES
-  ${OpenCASCADE_ApplicationFramework_LIBRARIES} ${OpenCASCADE_ModelingAlgorithms_LIBRARIES}
-  ${KERNEL_SALOMELocalTrace}
-  )
-
-# --- headers ---
 
 SET(ShHealOper_HEADERS
   ShHealOper_CloseContour.hxx
@@ -72,8 +51,9 @@ SET(ShHealOper_SOURCES
 
 # --- rules ---
 
-ADD_LIBRARY(ShHealOper ${ShHealOper_SOURCES})
-TARGET_LINK_LIBRARIES(ShHealOper ${_link_LIBRARIES})
-INSTALL(TARGETS ShHealOper EXPORT ${PROJECT_NAME}TargetGroup DESTINATION ${SALOME_INSTALL_LIBS})
 
-INSTALL(FILES ${ShHealOper_HEADERS} DESTINATION ${SALOME_INSTALL_HEADERS})
+ADD_LIBRARY(ShHealOper SHARED ${ShHealOper_SOURCES})
+target_include_directories(ShHealOper PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
+
+TARGET_LINK_LIBRARIES(ShHealOper ${OpenCASCADE_LIBRARIES})
+

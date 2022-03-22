@@ -27,7 +27,7 @@
 //
 #include <GEOMAlgo_Gluer.hxx>
 
-#include <Basics_OCCTVersion.hxx>
+//#include <Basics_OCCTVersion.hxx>
 
 #include <NCollection_UBTreeFiller.hxx>
 
