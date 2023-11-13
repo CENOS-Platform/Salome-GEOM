@@ -2,14 +2,15 @@
 cmake_minimum_required (VERSION 3.8)
 
 project ("SalomeGeom")
-set(third_party "D:/source/cenos-backend/third-party")
-set(FREETYPE-RELEASE "${third_party}/freetype-RELEASE")
-set(TCL-RELEASE "${third_party}/tcl8.6.11-RELEASE")
-
-find_package(VTK 8.2 REQUIRED HINTS "${third_party}/vtk-8.2.0-${CMAKE_BUILD_TYPE}")
+if (NOT DEFINED THIRD_PARTY_DIR)
+    message(FATAL_ERROR  "THIRD_PARTY_DIR not defined")
+endif()
 
 
-find_package(OpenCASCADE REQUIRED PATHS ${third_party}/OpenCASCADE-${CMAKE_BUILD_TYPE} NO_DEFAULT_PATH)
+find_package(VTK 9.2 REQUIRED HINTS "${THIRD_PARTY_DIR}/vtk-${CMAKE_BUILD_TYPE}")
+
+
+find_package(OpenCASCADE REQUIRED PATHS ${THIRD_PARTY_DIR}/OpenCASCADE-${CMAKE_BUILD_TYPE} NO_DEFAULT_PATH)
 message (STATUS "OpenCASCADE_DIR = ${OpenCASCADE_DIR}")
 
 
@@ -25,9 +26,9 @@ add_subdirectory("src/BlockFix")
 add_subdirectory("src/GeomAlgo")
 add_subdirectory("src/ShHealOper")
 
-set(bin_destination "${PROJECT_SOURCE_DIR}/bin")
-set(inc_destination "${PROJECT_SOURCE_DIR}/inc")
-set(lib_destination "${PROJECT_SOURCE_DIR}/lib")
+set(bin_destination "${CMAKE_INSTALL_PREFIX}/bin")
+set(inc_destination "${CMAKE_INSTALL_PREFIX}/inc")
+set(lib_destination "${CMAKE_INSTALL_PREFIX}/lib")
 install(TARGETS BlockFix GeomAlgo ShHealOper DESTINATION ${bin_destination} LIBRARY DESTINATION ${lib_destination})
 
 
