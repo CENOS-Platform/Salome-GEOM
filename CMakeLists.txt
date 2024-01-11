@@ -23,7 +23,7 @@ include_directories(
 MATH(EXPR OCC_VERSION_LARGE "${OpenCASCADE_MAJOR_VERSION} << 24 | ${OpenCASCADE_MINOR_VERSION}  << 16 | ${OpenCASCADE_MAINTENANCE_VERSION}  << 8" )
 
 add_subdirectory("src/BlockFix")
-add_subdirectory("src/GeomAlgo")
+add_subdirectory("src/GEOMAlgo")
 add_subdirectory("src/ShHealOper")
 
 set(bin_destination "${CMAKE_INSTALL_PREFIX}/bin")
@@ -34,7 +34,7 @@ install(TARGETS BlockFix GeomAlgo ShHealOper DESTINATION ${bin_destination} LIBR
 
 install(DIRECTORY  "src/BlockFix/" DESTINATION ${inc_destination}
     FILES_MATCHING PATTERN "*.h*")
-install(DIRECTORY  "src/GeomAlgo/" DESTINATION ${inc_destination}
+install(DIRECTORY  "src/GEOMAlgo/" DESTINATION ${inc_destination}
     FILES_MATCHING PATTERN "*.h*")
 install(DIRECTORY  "src/ShHealOper/" DESTINATION ${inc_destination}
     FILES_MATCHING PATTERN "*.h*")
