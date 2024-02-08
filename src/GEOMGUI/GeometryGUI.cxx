@@ -26,7 +26,7 @@
 
 #if OCC_VERSION_LARGE < 0x07080000
 
-#include <Standard_math.hxx>  // E.A. must be included before Python.h to fix compilation on windows
+#include <Standard_Real.hxx>  // E.A. must be included before Python.h to fix compilation on windows
 
 #else
 
